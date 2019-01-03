@@ -37,7 +37,7 @@ public class UsbSerialDevice {
                 String result = "";
                 int numBytesRead = port.read(buffer, 1000);
                 while (numBytesRead != 0) {
-                    result += new String(buffer);
+                    result += new String(buffer, 0, numBytesRead);
                     numBytesRead = port.read(buffer, 1000);
                 } 
                 
