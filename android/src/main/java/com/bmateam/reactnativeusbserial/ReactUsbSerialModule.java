@@ -50,6 +50,11 @@ public class ReactUsbSerialModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public int getBaudRate() {
+        return this.baudRate;
+    }
+
+    @ReactMethod
     public void getDeviceListAsync(Promise p) {
 
         try {
