@@ -31,6 +31,8 @@ import java.util.UUID;
 
 public class ReactUsbSerialModule extends ReactContextBaseJavaModule {
 
+    private int baudRate = 115200;
+
     private final HashMap<String, UsbSerialDevice> usbSerialDriverDict = new HashMap<>();
 
     public ReactUsbSerialModule(ReactApplicationContext reactContext) {
@@ -40,6 +42,11 @@ public class ReactUsbSerialModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "UsbSerial";
+    }
+
+    @ReactMethod
+    public void setBaudRate(int baudRate) {
+        this.baudRate = baudRate;
     }
 
     @ReactMethod
@@ -135,7 +142,7 @@ public class ReactUsbSerialModule extends ReactContextBaseJavaModule {
 
         // throw new IOException(String.format("Port count '%s'", connection.getFileDescriptor()));
         port.open(connection);
-        port.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
+        port.setParameters(this.baudRate, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
 
         String id = generateId();
         UsbSerialDevice usd = new UsbSerialDevice(port);

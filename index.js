@@ -19,6 +19,10 @@ export class UsbSerial {
         return UsbSerialModule.getDeviceListAsync();
     }
 
+    setBaudRate(baudRate = 115200) {
+        return UsbSerialModule.setBaudRate(baudRate);
+    }
+
     openDeviceAsync(deviceObject = {}) {
         return UsbSerialModule.openDeviceAsync(deviceObject).then((usbSerialDevNativeObject) => {
             return new UsbSerialDevice(UsbSerialModule, usbSerialDevNativeObject);
